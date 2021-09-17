@@ -1,14 +1,21 @@
-.PHONY: install \
-        clean
+.PHONY: 
+	install \
+  clean
 
-install: install-partner-pods 
-	bash ./deploy-test-pods.sh
+install:
+	./scripts/deploy-partner-pods.sh
+	./scripts/deploy-test-pods.sh
+	./scripts/deploy-operator.sh
 
 install-partner-pods:
-	bash ./deploy-partner-pods.sh
+	./scripts/deploy-partner-pods.sh
 
-install-operator-github:
-	bash ./deploy-operator.sh
+# Instal operator requires OLM and operator SDK
+install-operator:
+	./scripts/deploy-operator.sh
+
+clean-all:
+	./scripts/clean-all.sh
 
 clean:
-	bash ./clean-all.sh
+	./scripts/clean.sh
